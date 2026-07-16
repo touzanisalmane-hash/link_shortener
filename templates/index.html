@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Link Shortener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        input[type=text] {
+            width: 70%;
+            padding: 8px;
+        }
+        button {
+            padding: 8px 16px;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f0f0f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        th, td {
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Link Shortener</h1>
+
+    <form method="POST">
+        <input type="text" name="url" placeholder="Paste a long URL..." required>
+        <button type="submit">Shorten</button>
+    </form>
+
+    {% if short_url %}
+    <div class="result">
+        Short link: <a href="{{ short_url }}">{{ short_url }}</a>
+    </div>
+    {% endif %}
+
+    {% if links %}
+    <table>
+        <tr>
+            <th>Code</th>
+            <th>Original URL</th>
+            <th>Clicks</th>
+        </tr>
+        {% for link in links %}
+        <tr>
+            <td>{{ link.short_code }}</td>
+            <td>{{ link.original_url }}</td>
+            <td>{{ link.clicks }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
